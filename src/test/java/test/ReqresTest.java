@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 public class ReqresTest {
     private final static String URL ="https://reqres.in/";
     @Test
-    public void listUsers(){
+    public void listUsersTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(200));
         List<UserData> users = given()
                 .when()
@@ -24,7 +24,7 @@ public class ReqresTest {
         Assert.assertTrue(users.stream().allMatch(x->x.getEmail().endsWith("@reqres.in")));
     }
     @Test
-    public void singleUser(){
+    public void singleUserTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(200));
         UserData actual = given()
                 .when()
@@ -41,7 +41,7 @@ public class ReqresTest {
         Assert.assertEquals(expected,actual);
     }
     @Test
-    public void userNotFound(){
+    public void userNotFoundTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(404));
         List<UserData> user = given()
                 .when()
@@ -50,7 +50,7 @@ public class ReqresTest {
                 .extract().body().jsonPath().getList("data", UserData.class);
     }
     @Test
-    public void resource(){
+    public void resourceTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(200));
         List<ListResource> resor = given()
                 .when()
@@ -62,7 +62,7 @@ public class ReqresTest {
         Assert.assertEquals(expected,actual);
     }
     @Test
-    public void singleResource(){
+    public void singleResourceTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(200));
         ListResource actual = given()
                 .when()
@@ -79,7 +79,7 @@ public class ReqresTest {
         Assert.assertEquals(expected,actual);
     }
     @Test
-    public void resourceNotFound(){
+    public void resourceNotFoundTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(404));
         List<ListResource> resor = given()
                 .when()
@@ -88,7 +88,7 @@ public class ReqresTest {
                 .extract().body().jsonPath().getList("data", ListResource.class);
     }
     @Test
-    public void create(){
+    public void createTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(201));
         String name = "morpheus";
         String job = "leader";
@@ -103,7 +103,7 @@ public class ReqresTest {
         Assert.assertEquals(job,user.getJob());
     }
     @Test
-    public void update(){
+    public void updateTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(200));
         String name = "morpheus";
         String job = "zion resident";
@@ -118,7 +118,7 @@ public class ReqresTest {
         Assert.assertEquals(job,update.getJob());
     }
     @Test
-    public void deleteUser(){
+    public void deleteUserTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(204));
         given()
                 .when()
@@ -126,7 +126,7 @@ public class ReqresTest {
                 .then().log().all();
     }
     @Test
-    public void successReg(){
+    public void successRegTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(200));
         Integer id = 4;
         String token = "QpwL5tke4Pnpja7X4";
@@ -141,7 +141,7 @@ public class ReqresTest {
         Assert.assertEquals(token,successRegister.getToken());
     }
     @Test
-    public void unSuccessReg(){
+    public void unSuccessRegTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(400));
         Register user = new Register("sydney@fife", "");
         UnSuccessReg unSuccessReg = given()
@@ -153,7 +153,7 @@ public class ReqresTest {
         Assert.assertEquals("Missing password",unSuccessReg.getError());
     }
     @Test
-    public void successLogin(){
+    public void successLoginTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(200));
         String token = "QpwL5tke4Pnpja7X4";
         Login user = new Login("eve.holt@reqres.in", "cityslicka");
@@ -166,7 +166,7 @@ public class ReqresTest {
         Assert.assertEquals(token,successLogin.getToken());
     }
     @Test
-    public void unSuccessLogin(){
+    public void unSuccessLoginTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(400));
         Login user = new Login("peter@klaven","");
         UnSuccessLogin unSuccessLogin = given()
@@ -178,7 +178,7 @@ public class ReqresTest {
         Assert.assertEquals("Missing password",unSuccessLogin.getError());
     }
     @Test
-    public void delayedUserData(){
+    public void delayedUserDataTest(){
         Specification.installSpecification(Specification.RequestSpecification(URL),Specification.responseSpecUnique(200));
         List<UserData> users = given()
                 .when()
@@ -188,5 +188,4 @@ public class ReqresTest {
         users.forEach(x->Assert.assertTrue(x.getAvatar().contains(x.getId().toString())));
         Assert.assertTrue(users.stream().allMatch(x->x.getEmail().endsWith("@reqres.in")));
     }
-
 }

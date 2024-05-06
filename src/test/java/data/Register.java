@@ -1,17 +1,16 @@
 package data;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+
 public class Register {
     private String email;
     private String password;
-
-    public Register(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public String getPassword() {
-        return password;
-    }
 }

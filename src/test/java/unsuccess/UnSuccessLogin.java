@@ -9,5 +9,4 @@ public class UnSuccessLogin {
     public String getError(){
         return error;
     }
-
 }
