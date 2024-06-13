@@ -1,4 +1,7 @@
 package data;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,12 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-
-public class ListResource {
+public class Resource {
+    @JsonProperty("id")
     private Integer id;
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("year")
     private Integer year;
+    @JsonProperty("color")
     private String color;
-    private String pantone_value;
+    @JsonProperty("pantone_value")
+    private String pantoneValue;
 }
-

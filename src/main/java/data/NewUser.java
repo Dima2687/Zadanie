@@ -1,17 +1,17 @@
 package data;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-@NoArgsConstructor
 @AllArgsConstructor
 @Data
-
-public class User {
+@NoArgsConstructor
+public class NewUser {
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("job")
     private String job;
-    private String id;
-    private Date createdAt;
 }

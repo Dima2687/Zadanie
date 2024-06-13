@@ -1,5 +1,8 @@
 package data;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.*;
 
 import java.util.Date;
@@ -9,9 +12,11 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
 @Data
-
 public class Update {
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("job")
     private String job;
+    @JsonProperty("createdAt")
     private Date createdAt;
 }
